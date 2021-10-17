@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "target": "es2015",
+    "lib": ["ES2017", "dom"],
+    "types": ["cypress"]
+  },
+  "include": [
+    "**/*.ts",
+    "../node_modules/cypress"
+, "support/commands.ts", "support/index.ts"  ]
+}
