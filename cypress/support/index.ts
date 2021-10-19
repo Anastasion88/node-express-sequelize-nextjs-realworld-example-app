@@ -19,6 +19,3 @@ import './commands'
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
-Cypress.commands.add('loginToApp', () => {
-    cy.visit('/')
-})

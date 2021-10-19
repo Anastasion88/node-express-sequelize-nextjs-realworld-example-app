@@ -1,0 +1,39 @@
+{
+    "articles": [
+      {
+        "slug": "new-test-article-title-sy29ow",
+        "title": "New Test Article Title",
+        "description": "This article about testing",
+        "body": "You need to start learning Cypress today",
+        "createdAt": "2021-10-17T18:04:23.426Z",
+        "updatedAt": "2021-10-17T18:04:23.426Z",
+        "tagList": [],
+        "favorited": false,
+        "favoritesCount": 1,
+        "author": {
+          "username": "test",
+          "bio": null,
+          "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
+          "following": false
+        }
+      },
+      {
+        "slug": "new-test-article-title-n84slj",
+        "title": "New Test Article Title",
+        "description": "This article about testing",
+        "body": "You need to start learning Cypress today",
+        "createdAt": "2021-10-17T18:03:33.335Z",
+        "updatedAt": "2021-10-17T18:03:33.335Z",
+        "tagList": [],
+        "favorited": false,
+        "favoritesCount": 5,
+        "author": {
+          "username": "test",
+          "bio": null,
+          "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
+          "following": false
+        }
+      }
+    ],
+    "articlesCount": 2
+  }
