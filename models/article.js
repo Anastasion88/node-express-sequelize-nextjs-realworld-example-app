@@ -37,12 +37,11 @@ module.exports = (sequelize) => {
           }
         }
       },
-      // TODO for sorting by latest.
-      //indexes: [
-      //  {
-      //    fields: ['createdAt'],
-      //  },
-      //],
+      indexes: [
+        {
+          fields: ['createdAt'],
+        },
+      ],
     }
   )
 
@@ -64,8 +63,8 @@ module.exports = (sequelize) => {
       title: this.title,
       description: this.description,
       body: this.body,
-      createdAt: this.createdAt,
-      updatedAt: this.updatedAt,
+      createdAt: this.createdAt.toISOString(),
+      updatedAt: this.updatedAt.toISOString(),
       tagList: tags.map(tag => tag.name),
       favorited,
       favoritesCount,

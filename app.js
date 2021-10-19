@@ -8,11 +8,13 @@ const express = require('express')
 const http = require('http')
 const methods = require('methods')
 const morgan = require('morgan')
+const next = require('next')
 const passport = require('passport')
 const passport_local = require('passport-local');
 const path = require('path')
 const session = require('express-session')
 
+const api = require('./api')
 const models = require('./models')
 const config = require('./config')
 
@@ -41,18 +43,25 @@ function doStart(app) {
 
   // Normal express config defaults
   if (config.verbose) {
+    // https://stackoverflow.com/questions/42099925/logging-all-requests-in-node-js-express/64668730#64668730
     app.use(morgan('combined'))
   }
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(bodyParser.json())
   app.use(require('method-override')())
-  const buildDir = path.join(__dirname, 'react-redux-realworld-example-app', 'build');
-  app.use(express.static(buildDir));
+
+  // Next handles anythiung outside of /api.
   app.get(new RegExp('^(?!' + config.apiPath + '(/|$))'), function (req, res) {
-    res.sendFile(path.join(buildDir, 'index.html'));
+    return nextHandle(req, res);
   });
-  app.use(session({ secret: 'conduit', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false }))
-  app.use(require('./routes'))
+  app.use(session({ secret: config.secret, cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false }))
+
+  // Handle API routes.
+  {
+    const router = express.Router()
+    router.use(config.apiPath, api)
+    app.use(router)
+  }
 
   // 404 handler.
   app.use(function (req, res, next) {
@@ -92,6 +101,10 @@ function start(cb) {
 }
 
 const app = express()
-doStart(app)
+const nextApp = next({ dev: !config.isProductionNext })
+const nextHandle = nextApp.getRequestHandler()
+nextApp.prepare().then(() => {
+  doStart(app)
+})
 
 module.exports = { app, start }

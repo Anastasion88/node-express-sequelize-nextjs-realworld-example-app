@@ -8,7 +8,6 @@ router.get('/user', auth.required, function(req, res, next) {
       if (!user) {
         return res.sendStatus(401)
       }
-
       return res.json({ user: user.toAuthJSON() })
     })
     .catch(next)
@@ -56,7 +55,6 @@ router.post('/users/login', function(req, res, next) {
     if (err) {
       return next(err)
     }
-
     if (user) {
       user.token = user.generateJWT()
       return res.json({ user: user.toAuthJSON() })

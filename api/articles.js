@@ -2,7 +2,9 @@ const router = require('express').Router()
 const auth = require('../auth')
 const Op = require('sequelize').Op
 
+
 const config = require('../../config.js')
+newChangesCypress:api/articles.js
 
 // https://stackoverflow.com/questions/14382725/how-to-get-the-correct-ip-address-of-a-client-into-a-node-socket-io-app-hosted-o/14382990#14382990
 function getClientIp(req) {
@@ -223,6 +225,7 @@ router.put('/:article', auth.required, async function(req, res, next) {
       const article = req.article
       if (validateArticle(req, res, article, tagList)) return
       const tagList = req.body.article.tagList
+      if (validateArticle(req, res, article, tagList)) return
       await Promise.all([
         (typeof tagList === 'undefined')
           ? null
